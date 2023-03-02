@@ -1,0 +1,25 @@
+name: microsocks-msys2
+on: workflow_dispatch
+jobs:
+  build:
+    runs-on: windows-latest
+    steps:
+    - uses: actions/checkout@v2
+    - run: tree . /a /f
+    - uses: msys2/setup-msys2@v2
+      with:
+        update: true
+        install: >-
+          base-devel
+          gcc
+    - shell: msys2 {0} # {0} is probably the current directory
+      run: pwd
+    - shell: msys2 {0} # {0} is probably the current directory
+      run: uname -a
+    - shell: msys2 {0} # {0} is probably the current directory
+      run: make
+    - run: tree .
+    - uses: actions/upload-artifact@v2
+      with:
+        name: microsocks-msys2_${{ github.sha }}
+        path: microsocks.exe

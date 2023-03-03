@@ -1,0 +1,12 @@
+$ make
+cc  -Wall -std=c99   -c -o sockssrv.o sockssrv.c
+cc  -Wall -std=c99   -c -o server.o server.c
+cc  -Wall -std=c99   -c -o sblist.o sblist.c
+sblist.c:8:2: warning: #warning "your C library sucks." [-Wcpp]
+ #warning "your C library sucks."
+  ^~~~~~~
+cc  -Wall -std=c99   -c -o sblist_delete.o sblist_delete.c
+cc  sockssrv.o server.o sblist.o sblist_delete.o -lpthread -o microsocks
+
+$ ./microsocks.exe
+client[4] 127.0.0.1: connected to x.x.x.x:443
